@@ -1,0 +1,2 @@
+# 2024_BEOTKKOTTHON_TEAM_6_FE
+2024 벚꽃톤 6팀 REBOOK FrontEnd Repository입니다.
