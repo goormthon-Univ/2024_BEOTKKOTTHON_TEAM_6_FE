@@ -49,33 +49,29 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
-    - assets/images/character/
-    - assets/images/analysis/
-    - assets/images/on_boarding/
-    - assets/images/thumbnail/
-    - assets/icons/
-    - assets/riv/
-    - assets/config/.env
+    - asset/image/
+    - asset/icon/
+    - asset/riv/
+#    - asset/config/.env
 
   fonts:
     - family: Pretendard
       fonts:
-        - asset: assets/fonts/Pretendard-Thin.otf
+        - asset: asset/font/Pretendard-Thin.otf
           weight: 100
-        - asset: assets/fonts/Pretendard-ExtraLight.otf
+        - asset: asset/font/Pretendard-ExtraLight.otf
           weight: 200
-        - asset: assets/fonts/Pretendard-Light.otf
+        - asset: asset/font/Pretendard-Light.otf
           weight: 300
-        - asset: assets/fonts/Pretendard-Regular.otf
+        - asset: asset/font/Pretendard-Regular.otf
           weight: 400
-        - asset: assets/fonts/Pretendard-Medium.otf
+        - asset: asset/font/Pretendard-Medium.otf
           weight: 500
-        - asset: assets/fonts/Pretendard-SemiBold.otf
+        - asset: asset/font/Pretendard-SemiBold.otf
           weight: 600
-        - asset: assets/fonts/Pretendard-Bold.otf
+        - asset: asset/font/Pretendard-Bold.otf
           weight: 700
-        - asset: assets/fonts/Pretendard-ExtraBold.otf
+        - asset: asset/font/Pretendard-ExtraBold.otf
           weight: 800
-        - asset: assets/fonts/Pretendard-Black.otf
+        - asset: asset/font/Pretendard-Black.otf
           weight: 900
