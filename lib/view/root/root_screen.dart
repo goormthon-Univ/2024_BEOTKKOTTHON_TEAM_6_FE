@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rebook/view/base/base_screen.dart';
+import 'package:rebook/view/home/home_screen.dart';
+import 'package:rebook/view/load_map/load_map_screen.dart';
+import 'package:rebook/view/profile/profile_screen.dart';
+import 'package:rebook/view/root/widget/custom_bottom_navigation_bar.dart';
 import 'package:rebook/view_model/root/root_view_model.dart';
 
 class RootScreen extends BaseScreen<RootViewModel> {
@@ -7,10 +12,22 @@ class RootScreen extends BaseScreen<RootViewModel> {
 
   @override
   Widget buildBody(BuildContext context) {
-    return const Center(
-      child: Text(
-        'RootScreen',
+    return Obx(
+      () => IndexedStack(
+        index: viewModel.selectedIndex,
+        children: const [
+          LoadMapScreen(),
+          HomeScreen(),
+          ProfileScreen(),
+        ],
       ),
     );
   }
+
+  @override
+  bool get extendBodyBehindAppBar => true;
+
+  @override
+  Widget? buildBottomNavigationBar(BuildContext context) =>
+      const CustomBottomNavigationBar();
 }
