@@ -15,7 +15,11 @@ class CustomBottomNavigationBar extends BaseWidget<RootViewModel> {
     return Container(
       height: 80,
       padding: const EdgeInsets.all(12),
-      margin: const EdgeInsets.only(left: 16, right: 16, bottom: 36),
+      margin: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        bottom: GetPlatform.isAndroid ? 20 : 32,
+      ),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           begin: Alignment.topCenter,
