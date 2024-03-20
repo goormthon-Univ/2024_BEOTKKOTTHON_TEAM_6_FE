@@ -29,8 +29,8 @@ class MainApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xFFf6f6f8),
       ),
 
-      // initialRoute: Routes.LOGIN, // 로그인 화면으로 시작(TEST)
-      initialRoute: Routes.ROOT,
+      initialRoute: Routes.LOGIN, // 로그인 화면으로 시작(TEST)
+      // initialRoute: Routes.ROOT,
       initialBinding: InitBinding(),
       getPages: appPages,
     );

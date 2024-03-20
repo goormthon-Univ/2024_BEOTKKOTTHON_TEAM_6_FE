@@ -36,6 +36,10 @@ dependencies:
   # Animation
   rive: ^0.13.1
 
+  # kakao login
+  kakao_flutter_sdk: ^1.9.0
+  kakao_flutter_sdk_user: ^1.9.0
+
 dev_dependencies:
   # Default
   flutter_test:
