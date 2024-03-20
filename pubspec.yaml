@@ -36,6 +36,10 @@ dependencies:
   # Animation
   rive: ^0.13.1
 
+  # kakao login
+  kakao_flutter_sdk: ^1.9.0
+  kakao_flutter_sdk_user: ^1.9.0
+
 dev_dependencies:
   # Default
   flutter_test:
@@ -45,6 +49,15 @@ dev_dependencies:
   # Localization
   intl_translation: ^0.18.1
 
+  # app icon
+  flutter_launcher_icons: ^0.13.1
+
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon_blue.png"
+
 flutter:
   uses-material-design: true
 
@@ -52,7 +65,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/rivs/
-#    - assets/config/.env
+    - assets/config/.env
 
   fonts:
     - family: Pretendard

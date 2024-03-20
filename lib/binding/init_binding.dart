@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:rebook/repository/user_repository.dart';
 
 class InitBinding extends Bindings {
   @override
@@ -6,5 +7,8 @@ class InitBinding extends Bindings {
     // Providers
 
     // Repositories
+    Get.putAsync<UserRepository>(
+          () async => UserRepository(),
+    );
   }
 }
