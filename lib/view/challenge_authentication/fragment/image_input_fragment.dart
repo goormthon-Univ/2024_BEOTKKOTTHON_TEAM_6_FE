@@ -24,21 +24,30 @@ class ImageInputFragment extends BaseScreen<ChallengeAuthenticationViewModel> {
     return Container(
       decoration: BoxDecoration(
         color: ColorSystem.white,
-        border: Border.all(color: Colors.white, width: 3),
         borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '사진으로 재활용 알아보기',
-            style: FontSystem.KR20B.copyWith(color: ColorSystem.blue),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            child: Column(
+              children: [
+                Text(
+                  '사진으로 재활용 알아보기',
+                  style: FontSystem.KR20B.copyWith(color: ColorSystem.blue),
+                ),
+              ],
+            ),
           ),
-          const SizedBox(height: 8),
-          Text(
-            '사진을 첨부해 재활용 방법을 알아보세요',
-            style: FontSystem.KR16R.copyWith(color: ColorSystem.blue),
+          Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Text(
+              '사진을 첨부해 재활용 방법을 알아보세요',
+              style: FontSystem.KR16R.copyWith(color: ColorSystem.blue),
+            ),
           ),
           const SizedBox(height: 20),
           Obx(

@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:rebook/utility/system/font_system.dart';
 import 'package:rebook/view/base/base_screen.dart';
+import 'package:rebook/view/challenge_authentication/fragment/loading_fragment.dart';
 import 'package:rebook/view/challenge_authentication/fragment/result_fragment.dart';
 import 'package:rebook/view_model/challenge_authentication/challenge_authentication_view_model.dart';
 
