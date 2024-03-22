@@ -90,7 +90,8 @@ class AnimatingCircle extends CustomPainter {
 
     canvas.save();
     canvas.translate(size.width / 2, size.height / 2);
-    canvas.rotate(-math.pi / 2 + 2 * math.pi * animation.value);
+    /// 반시계 방향으로 회전
+    canvas.rotate(-math.pi / 2 - 2 * math.pi * animation.value);
     canvas.translate(-size.width / 2, -size.height / 2);
 
     canvas.drawCircle(size.center(Offset.zero), size.width / 2, paint);
