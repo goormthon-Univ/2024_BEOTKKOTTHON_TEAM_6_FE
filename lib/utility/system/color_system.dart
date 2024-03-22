@@ -22,6 +22,25 @@ abstract class ColorSystem {
   /// Speech Bubble Color
   static Color lightBeige = const Color(0xFFF3F1EE);
 
+  static const int _bluePrimaryValue = 0xFF5356FF;
+
+  static MaterialColor blue = const MaterialColor(
+    _bluePrimaryValue,
+    <int, Color>{
+      100: Color(0xFFE1E2FF),
+      200: Color(0xFF9092ff),
+      300: Color(0xFF7F82FF),
+      400: Color(0xFF5A5DFF),
+      500: Color(0xFF5356FF),
+      600: Color(0xFF4C4FFF),
+      700: Color(0xFF4245FF),
+      800: Color(0xFF393CFF),
+      900: Color(0xFF2A2EFF),
+      1000: Color(0xFF1D1EFF),
+    },
+  );
+
+
   /// Grey Color
   static MaterialColor grey = const MaterialColor(
     _greyPrimaryValue,
