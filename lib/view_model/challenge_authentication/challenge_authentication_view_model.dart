@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:rebook/utility/functions/log_util.dart';
 import 'package:rive/rive.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -47,14 +49,34 @@ class ChallengeAuthenticationViewModel extends GetxController {
     _pageController.dispose();
   }
 
-  void getImage() async {
-    final XFile? image =
-    await ImagePicker().pickImage(source: ImageSource.gallery);
+  // void getImage() async {
+  //   final XFile? image =
+  //   await ImagePicker().pickImage(source: ImageSource.gallery);
+  //
+  //   if (image != null) {
+  //     _image.value = image;
+  //   }
+  // }
 
-    if (image != null) {
-      _image.value = image;
+  Future<void> requestPermission() async {
+    var status = await Permission.photos.status;
+    if (!status.isGranted) {
+      // 권한이 허용되지 않았다면, 사용자에게 권한 요청
+      await Permission.photos.request();
     }
   }
+
+  Future<void> getImage() async {
+    await requestPermission();
+    var status = await Permission.photos.status;
+    if (status.isGranted) {
+     getImage();
+    } else {
+      // 권한이 허용되지 않았다면, 사용자에게 권한 요청
+      await Permission.photos.request();
+    }
+  }
+
 
   /// Authentication Challenge
   void authenticationChallenge() async {

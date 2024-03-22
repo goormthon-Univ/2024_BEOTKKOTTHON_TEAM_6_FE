@@ -52,6 +52,9 @@ dependencies:
   # Skeleton Animation
   shimmer: ^3.0.0
 
+  # Permission
+  permission_handler: ^11.2.1
+
 dev_dependencies:
   # Default
   flutter_test:
