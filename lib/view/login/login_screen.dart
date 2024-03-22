@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rebook/utility/functions/log_util.dart';
+import 'package:rebook/utility/static/app_routes.dart';
+import 'package:rebook/utility/system/color_system.dart';
 import 'package:rebook/view_model/login/login_view_model.dart';
 
 class LoginScreen extends GetView<LoginViewModel> {
@@ -27,11 +29,18 @@ class LoginScreen extends GetView<LoginViewModel> {
               onTap: () async {
                 bool success = await viewModel.kakaoSignInAccount();
                 if (success) {
-                  // 로그인 성공 처리
-                  LogUtil.info('로그인 성공');
+                  _showSnackBar(
+                    title: '로그인 성공',
+                    message: '다양한 서비스를 이용해보세요!',
+                    textColor: ColorSystem.white,
+                  );
+                  Get.offAndToNamed(Routes.ROOT);
                 } else {
-                  // 로그인 실패 처리
-                  LogUtil.info('로그인 실패');
+                  _showSnackBar(
+                    title: '로그인 실패',
+                    message: '다시 시도해주세요.',
+                    textColor: ColorSystem.white,
+                  );
                 }
               },
               child: Image.asset(
@@ -43,6 +52,22 @@ class LoginScreen extends GetView<LoginViewModel> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showSnackBar({
+    required String title,
+    required String message,
+    Color? textColor,
+  }) {
+    Get.snackbar(
+      title,
+      message,
+      colorText: textColor ?? ColorSystem.black,
+      snackPosition: SnackPosition.TOP,
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      duration: const Duration(seconds: 2),
+      backgroundColor: ColorSystem.grey.withOpacity(0.3),
     );
   }
 }

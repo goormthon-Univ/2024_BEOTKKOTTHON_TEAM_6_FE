@@ -1,23 +1,41 @@
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:rebook/repository/user_repository.dart';
 import 'package:rebook/utility/functions/log_util.dart';
 
+import '../../repository/auth/auth_repository.dart';
+
 class LoginViewModel extends GetxController {
+  /* ------------------------------------------------------ */
+  /* -------------------- DI Fields ----------------------- */
+  /* ------------------------------------------------------ */
+  late final AuthRepository _authRepository;
   late final UserRepository _userRepository;
 
-  // 공통 UI 상태 관리를 위한 RxBool 변수
+  /* ------------------------------------------------------ */
+  /* ----------------- Private Fields --------------------- */
+  /* ------------------------------------------------------ */
   late final RxBool _isEnableGreyBarrier;
+
+  /* ------------------------------------------------------ */
+  /* ----------------- Public Fields ---------------------- */
+  /* ------------------------------------------------------ */
   bool get isEnableGreyBarrier => _isEnableGreyBarrier.value;
 
-  LoginViewModel() {
+  @override
+  void onInit() {
+    super.onInit();
+    // Dependency Injection
+    _authRepository = Get.find<AuthRepository>();
     _userRepository = Get.find<UserRepository>();
-    _isEnableGreyBarrier = false.obs; // 초기 UI 상태 설정
+
+    // Initialize Private Fields
+    _isEnableGreyBarrier = false.obs;
   }
 
   Future<bool> kakaoSignInAccount() async {
-    _isEnableGreyBarrier.value = true;
+    String kakaoAccessToken;
+
     try {
       OAuthToken token;
       if (await isKakaoTalkInstalled()) {
@@ -25,28 +43,17 @@ class LoginViewModel extends GetxController {
       } else {
         token = await UserApi.instance.loginWithKakaoAccount();
       }
-      // AccessToken 출력
-      LogUtil.info("kakao accessToken: ${token.accessToken}");
-      // 여기서 받은 토큰으로 우리 서버에 로그인 api 호출
-
-      _isEnableGreyBarrier.value = false;
-      return true; // 로그인 성공
-    } catch (error) {
-      String errorMessage = "카카오 로그인 실패";
-      if (error is KakaoAuthException) {
-        errorMessage += ": 인증 에러";
-      } else if (error is KakaoClientException) {
-        errorMessage += ": 클라이언트 에러";
-      } else if (error is PlatformException && error.code == 'CANCELED') {
-        errorMessage = "카카오 로그인 취소";
-      } else if (error is Exception) {
-        errorMessage += ": 예외 발생";
-      }
-      LogUtil.error(errorMessage);
-
-      _isEnableGreyBarrier.value = false;
+      kakaoAccessToken = token.accessToken;
+    } catch (_) {
       return false; // 로그인 실패
     }
-  }
+    LogUtil.info('Kakao Access Token: $kakaoAccessToken');
+    _isEnableGreyBarrier.value = true;
 
+    bool result =
+        await _authRepository.loginWithKakaoAccessToken(kakaoAccessToken);
+
+    _isEnableGreyBarrier.value = false;
+    return result;
+  }
 }
