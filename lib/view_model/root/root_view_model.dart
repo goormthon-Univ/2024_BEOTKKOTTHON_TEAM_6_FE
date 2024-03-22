@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 import 'package:rebook/model/root/custom_bottom_navigation_item_state.dart';
+import 'package:rebook/model/root/user_state.dart';
+import 'package:rebook/repository/user_repository.dart';
+import 'package:rebook/utility/functions/log_util.dart';
 import 'package:rive/rive.dart';
 
 class RootViewModel extends GetxController {
@@ -9,9 +12,15 @@ class RootViewModel extends GetxController {
   static const duration = Duration(milliseconds: 200);
 
   /* ------------------------------------------------------ */
+  /* -------------------- DI Fields ----------------------- */
+  /* ------------------------------------------------------ */
+  late final UserRepository _userRepository;
+
+  /* ------------------------------------------------------ */
   /* ----------------- Private Fields --------------------- */
   /* ------------------------------------------------------ */
   late final RxInt _selectedIndex;
+  late final Rx<UserState> _userState;
 
   late final List<SMIBool> _riveIconInputs;
   late final List<StateMachineController?> _controllers;
@@ -29,8 +38,12 @@ class RootViewModel extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    // Dependency Injection
+    _userRepository = Get.find<UserRepository>();
 
+    // Initialize private fields
     _selectedIndex = 1.obs;
+    _userState = UserState.initial().obs;
 
     _riveIconInputs = [];
     _controllers = [];
@@ -52,8 +65,18 @@ class RootViewModel extends GetxController {
   }
 
   @override
+  void onReady() async {
+    super.onReady();
+
+    await _userRepository.readUserState().then((value) {
+      _userState.value = value;
+    });
+
+    LogUtil.info('User State: ${_userState.value}');
+  }
+
+  @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
 
     for (var controller in _controllers) {

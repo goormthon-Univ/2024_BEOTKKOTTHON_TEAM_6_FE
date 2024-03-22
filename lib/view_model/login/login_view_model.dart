@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
-import 'package:rebook/repository/user_repository.dart';
 import 'package:rebook/utility/functions/log_util.dart';
 
 import '../../repository/auth/auth_repository.dart';
@@ -10,7 +9,6 @@ class LoginViewModel extends GetxController {
   /* -------------------- DI Fields ----------------------- */
   /* ------------------------------------------------------ */
   late final AuthRepository _authRepository;
-  late final UserRepository _userRepository;
 
   /* ------------------------------------------------------ */
   /* ----------------- Private Fields --------------------- */
@@ -27,7 +25,6 @@ class LoginViewModel extends GetxController {
     super.onInit();
     // Dependency Injection
     _authRepository = Get.find<AuthRepository>();
-    _userRepository = Get.find<UserRepository>();
 
     // Initialize Private Fields
     _isEnableGreyBarrier = false.obs;

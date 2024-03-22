@@ -13,7 +13,7 @@ class SecureStorageFactory {
 
     _tokenProvider = TokenProviderImpl(flutterSecureStorage: _instance!);
 
-    _tokenProvider!.onInit();
+    await _tokenProvider!.onInit();
     await _tokenProvider!.clearTokens();
   }
 }
