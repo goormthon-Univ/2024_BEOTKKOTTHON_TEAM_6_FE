@@ -8,4 +8,6 @@ abstract class Routes {
   static const String HOME = "/home";
   static const String LOAD_MAP = "/load_map";
   static const String PROFILE = "/profile";
+  static const String MATCHING = "/matching";
+  static const String CHALLENGE_AUTHENTICATION = "/challenge_authentication";
 }
