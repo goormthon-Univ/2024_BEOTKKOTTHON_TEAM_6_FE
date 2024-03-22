@@ -1,7 +1,7 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get_connect/connect.dart';
 import 'package:rebook/app/factory/secure_storage_factory.dart';
-import 'package:rebook/provider/user/token_provider.dart';
+import 'package:rebook/provider/token/token_provider.dart';
 import 'package:rebook/utility/functions/log_util.dart';
 
 abstract class BaseConnect extends GetConnect {

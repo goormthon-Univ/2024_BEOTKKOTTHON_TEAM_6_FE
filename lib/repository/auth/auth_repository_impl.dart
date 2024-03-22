@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:rebook/app/factory/secure_storage_factory.dart';
 import 'package:rebook/provider/auth/auth_provider.dart';
-import 'package:rebook/provider/user/token_provider.dart';
+import 'package:rebook/provider/token/token_provider.dart';
 import 'package:rebook/repository/auth/auth_repository.dart';
 
 class AuthRepositoryImpl extends GetxService implements AuthRepository {

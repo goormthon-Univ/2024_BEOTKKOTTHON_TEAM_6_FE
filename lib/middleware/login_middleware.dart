@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rebook/app/factory/secure_storage_factory.dart';
-import 'package:rebook/provider/user/token_provider.dart';
+import 'package:rebook/provider/token/token_provider.dart';
 import 'package:rebook/utility/static/app_routes.dart';
 
 class LoginMiddleware extends GetMiddleware {

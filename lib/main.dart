@@ -18,5 +18,5 @@ Future<void> onSystemInit() async {
   KakaoSdk.init(nativeAppKey: "${dotenv.env['KAKAO_APP_KEY']}");
 
   // Factory
-  SecureStorageFactory().onInit();
+  await SecureStorageFactory().onInit();
 }

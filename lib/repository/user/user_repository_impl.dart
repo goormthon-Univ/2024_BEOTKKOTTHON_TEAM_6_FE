@@ -1,13 +1,13 @@
 import 'package:get/get.dart';
 import 'package:rebook/model/root/user_state.dart';
 import 'package:rebook/provider/user/user_remote_provider.dart';
+import 'package:rebook/repository/user/user_repository.dart';
 
-class UserRepository extends GetxService {
+class UserRepositoryImpl extends GetxService implements UserRepository {
   late final UserRemoteProvider _userRemoteProvider;
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     _userRemoteProvider = Get.find<UserRemoteProvider>();
   }

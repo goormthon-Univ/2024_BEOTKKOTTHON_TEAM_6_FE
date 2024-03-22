@@ -5,7 +5,8 @@ import 'package:rebook/provider/user/user_remote_provider.dart';
 import 'package:rebook/provider/user/user_remote_provider_impl.dart';
 import 'package:rebook/repository/auth/auth_repository.dart';
 import 'package:rebook/repository/auth/auth_repository_impl.dart';
-import 'package:rebook/repository/user_repository.dart';
+import 'package:rebook/repository/user/user_repository.dart';
+import 'package:rebook/repository/user/user_repository_impl.dart';
 
 class InitBinding extends Bindings {
   @override
@@ -14,17 +15,13 @@ class InitBinding extends Bindings {
     Get.putAsync<AuthProvider>(
       () async => AuthProviderImpl(),
     );
-    Get.putAsync<UserRemoteProvider>(
-      () async => UserRemoteProviderImpl(),
-    );
+    Get.lazyPut<UserRemoteProvider>(() => UserRemoteProviderImpl());
 
     // Repositories
     Get.putAsync<AuthRepository>(
       () async => AuthRepositoryImpl(),
     );
 
-    Get.putAsync<UserRepository>(
-      () async => UserRepository(),
-    );
+    Get.lazyPut<UserRepository>(() => UserRepositoryImpl());
   }
 }

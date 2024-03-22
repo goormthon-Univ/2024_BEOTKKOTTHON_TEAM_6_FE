@@ -1,8 +1,7 @@
 import 'package:get/get.dart';
 import 'package:rebook/model/root/custom_bottom_navigation_item_state.dart';
 import 'package:rebook/model/root/user_state.dart';
-import 'package:rebook/repository/user_repository.dart';
-import 'package:rebook/utility/functions/log_util.dart';
+import 'package:rebook/repository/user/user_repository.dart';
 import 'package:rive/rive.dart';
 
 class RootViewModel extends GetxController {
@@ -71,8 +70,6 @@ class RootViewModel extends GetxController {
     await _userRepository.readUserState().then((value) {
       _userState.value = value;
     });
-
-    LogUtil.info('User State: ${_userState.value}');
   }
 
   @override

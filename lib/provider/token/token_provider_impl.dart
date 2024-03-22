@@ -1,5 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:rebook/provider/user/token_provider.dart';
+import 'package:rebook/provider/token/token_provider.dart';
 
 class TokenProviderImpl implements TokenProvider {
   TokenProviderImpl({

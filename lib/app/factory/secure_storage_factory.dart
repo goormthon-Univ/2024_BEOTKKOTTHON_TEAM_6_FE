@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:rebook/provider/user/token_provider.dart';
-import 'package:rebook/provider/user/token_provider_impl.dart';
+import 'package:rebook/provider/token/token_provider.dart';
+import 'package:rebook/provider/token/token_provider_impl.dart';
 
 class SecureStorageFactory {
   static FlutterSecureStorage? _instance;
@@ -14,6 +14,5 @@ class SecureStorageFactory {
     _tokenProvider = TokenProviderImpl(flutterSecureStorage: _instance!);
 
     await _tokenProvider!.onInit();
-    await _tokenProvider!.clearTokens();
   }
 }
