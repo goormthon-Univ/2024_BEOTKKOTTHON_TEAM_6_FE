@@ -19,7 +19,7 @@ class HomeScreen extends BaseScreen<HomeViewModel> {
   @override
   PreferredSizeWidget? buildAppBar(BuildContext context) {
     return const PreferredSize(
-      preferredSize: Size.fromHeight(60),
+      preferredSize: Size.fromHeight(30),
       child: DefaultSvgAppBar(
         svgPath: 'assets/images/appbar_rebook_logo.svg',
         height: 24,
