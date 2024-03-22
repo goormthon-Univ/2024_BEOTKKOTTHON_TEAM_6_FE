@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:rebook/utility/system/color_system.dart';
 import 'package:rebook/utility/system/font_system.dart';
 import 'package:rebook/view/base/base_widget.dart';
@@ -31,9 +32,11 @@ class HomeUserView extends BaseWidget<RootViewModel> {
           ),
         ),
         const SizedBox(width: 20),
-        Text(
-          viewModel.userState.nickname,
-          style: FontSystem.KR24EB,
+        Obx(
+          () => Text(
+            viewModel.userState.nickname,
+            style: FontSystem.KR24EB,
+          ),
         ),
       ],
     );

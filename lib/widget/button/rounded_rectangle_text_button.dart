@@ -33,7 +33,7 @@ class RoundedRectangleTextButton extends StatelessWidget {
         foregroundColor: foregroundColor,
         side: borderSide,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
       child: Text(

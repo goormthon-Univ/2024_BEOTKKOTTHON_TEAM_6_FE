@@ -8,17 +8,17 @@ class VerticalIconTextButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.svgPath,
-    this.onPressed,
+    this.onTap,
   });
 
   final String text;
   final String svgPath;
-  final Function()? onPressed;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed,
+      onTap: onTap,
       borderRadius: BorderRadius.circular(20),
       child: Container(
         width: (Get.width - 52) * 0.5,

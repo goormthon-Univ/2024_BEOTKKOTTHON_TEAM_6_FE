@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:rebook/model/home/quiz_state.dart';
-import 'package:rebook/utility/functions/log_util.dart';
 import 'package:rebook/utility/system/font_system.dart';
 import 'package:rebook/view/home/component/card_container.dart';
 import 'package:rebook/view/home/component/horizon_icon_text_button.dart';
@@ -11,14 +10,16 @@ class QuizCard extends StatelessWidget {
   const QuizCard({
     super.key,
     required this.state,
+    required this.onTap,
   });
 
   final QuizState state;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     String svgPath =
-        'assets/thumbnail/recycle_${state.category.en.toLowerCase()}_${state.id % 2}.svg';
+        'assets/thumbnail/recycle_${state.category.en.toLowerCase()}_${state.quizId % 2}.svg';
 
     return CardContainer(
       child: Padding(
@@ -41,11 +42,9 @@ class QuizCard extends StatelessWidget {
             ),
             const Spacer(),
             HorizonIconTextButton(
-              text: '퀴즈풀기',
+              text: state.quizHistoryId != null ? '결과확인' : '퀴즈풀기',
               svgPath: 'assets/icons/search.svg',
-              onPressed: () {
-                LogUtil.info('시작하기 버튼이 탭됐을 때의 동작 구현');
-              },
+              onTap: onTap,
             ),
           ],
         ),

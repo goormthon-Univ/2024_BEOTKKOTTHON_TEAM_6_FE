@@ -7,17 +7,17 @@ class HorizonIconTextButton extends StatelessWidget {
     super.key,
     required this.text,
     required this.svgPath,
-    this.onPressed,
+    this.onTap,
   });
 
   final String text;
   final String svgPath;
-  final Function()? onPressed;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onPressed,
+      onTap: onTap,
       borderRadius: const BorderRadius.all(
         Radius.circular(30.0),
       ),

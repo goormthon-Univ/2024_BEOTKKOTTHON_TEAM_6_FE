@@ -49,6 +49,9 @@ dependencies:
   # flutter_secure_storage
   flutter_secure_storage: ^9.0.0
 
+  # Skeleton Animation
+  shimmer: ^3.0.0
+
 dev_dependencies:
   # Default
   flutter_test:

@@ -7,8 +7,11 @@ import 'package:rebook/repository/auth/auth_repository.dart';
 import 'package:rebook/repository/auth/auth_repository_impl.dart';
 import 'package:rebook/repository/quiz/quiz_repository.dart';
 import 'package:rebook/repository/quiz/quiz_repository_impl.dart';
+import 'package:rebook/repository/quiz_history/quiz_history_repository.dart';
 import 'package:rebook/repository/user/user_repository.dart';
 import 'package:rebook/repository/user/user_repository_impl.dart';
+
+import '../repository/quiz_history/quiz_history_repository_impl.dart';
 
 class InitBinding extends Bindings {
   @override
@@ -26,5 +29,6 @@ class InitBinding extends Bindings {
 
     Get.lazyPut<UserRepository>(() => UserRepositoryImpl());
     Get.lazyPut<QuizRepository>(() => QuizRepositoryImpl());
+    Get.lazyPut<QuizHistoryRepository>(() => QuizHistoryRepositoryImpl());
   }
 }
