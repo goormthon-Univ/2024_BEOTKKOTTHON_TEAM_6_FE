@@ -40,6 +40,12 @@ dependencies:
   kakao_flutter_sdk: ^1.9.0
   kakao_flutter_sdk_user: ^1.9.0
 
+  # Extended Nested Scroll View
+  extended_nested_scroll_view: ^6.2.1
+
+  # image_picker
+  image_picker: ^1.0.7
+
 dev_dependencies:
   # Default
   flutter_test:
