@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rebook/utility/system/color_system.dart';
 
 @immutable
 abstract class BaseScreen<T extends GetxController> extends GetView<T> {
@@ -14,8 +15,18 @@ abstract class BaseScreen<T extends GetxController> extends GetView<T> {
 
     /// SafeArea로 감싸거나 감싸지 않는 옵션에 따라 화면을 구성
     return Container(
+      // decoration: BoxDecoration(
+      //   color: unSafeAreaColor,
+      // ),
       decoration: BoxDecoration(
-        color: unSafeAreaColor,
+        /// 조건에 따라 그라데이션 설정
+        color: useGradientBackground ? null : unSafeAreaColor,
+        /// 그라데이션 사용 여부
+        gradient: useGradientBackground ? LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.center,
+          colors: [ColorSystem.blue[300]!, Colors.white],
+        ) : null,
       ),
       child: wrapWithOuterSafeArea
           ? SafeArea(
@@ -112,6 +123,9 @@ abstract class BaseScreen<T extends GetxController> extends GetView<T> {
   /// 화면의 본문을 구성하는 메서드로 하위 클래스에서 반드시 구현되어야 함
   @protected
   Widget buildBody(BuildContext context);
+
+  /// 화면 배경 색깔 그라데이션 적용 여부 정의하는 메서드
+  bool get useGradientBackground => true;
 
   /// BottomNavigationBar를 구성하는 메서드
   @protected

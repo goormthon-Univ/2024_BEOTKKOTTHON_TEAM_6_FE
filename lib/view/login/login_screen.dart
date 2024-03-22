@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rebook/utility/functions/log_util.dart';
 import 'package:rebook/view_model/login/login_view_model.dart';
 
 class LoginScreen extends GetView<LoginViewModel> {
@@ -27,10 +28,10 @@ class LoginScreen extends GetView<LoginViewModel> {
                 bool success = await viewModel.kakaoSignInAccount();
                 if (success) {
                   // 로그인 성공 처리
-                  print('로그인 성공');
+                  LogUtil.info('로그인 성공');
                 } else {
                   // 로그인 실패 처리
-                  print('로그인 실패');
+                  LogUtil.info('로그인 실패');
                 }
               },
               child: Image.asset(

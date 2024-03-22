@@ -25,12 +25,12 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: 'Pretendard',
-        colorSchemeSeed: ColorSystem.green,
+        colorSchemeSeed: ColorSystem.blue, //
         scaffoldBackgroundColor: const Color(0xFFf6f6f8),
       ),
 
-      initialRoute: Routes.LOGIN, // 로그인 화면으로 시작(TEST)
-      // initialRoute: Routes.ROOT,
+      // initialRoute: Routes.LOGIN, // 로그인 화면으로 시작(TEST)
+      initialRoute: Routes.ROOT,
       initialBinding: InitBinding(),
       getPages: appPages,
     );

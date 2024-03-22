@@ -2,6 +2,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:rebook/repository/user_repository.dart';
+import 'package:rebook/utility/functions/log_util.dart';
 
 class LoginViewModel extends GetxController {
   late final UserRepository _userRepository;
@@ -25,7 +26,7 @@ class LoginViewModel extends GetxController {
         token = await UserApi.instance.loginWithKakaoAccount();
       }
       // AccessToken 출력
-      print('카카오 로그인 성공: AccessToken: ${token.accessToken}');
+      LogUtil.info("kakao accessToken: ${token.accessToken}");
       // 여기서 받은 토큰으로 우리 서버에 로그인 api 호출
 
       _isEnableGreyBarrier.value = false;
@@ -41,7 +42,7 @@ class LoginViewModel extends GetxController {
       } else if (error is Exception) {
         errorMessage += ": 예외 발생";
       }
-      print(errorMessage);
+      LogUtil.error(errorMessage);
 
       _isEnableGreyBarrier.value = false;
       return false; // 로그인 실패

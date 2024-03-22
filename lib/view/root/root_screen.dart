@@ -15,17 +15,17 @@ class RootScreen extends BaseScreen<RootViewModel> {
     return Obx(
       () => IndexedStack(
         index: viewModel.selectedIndex,
-        children: const [
+        children:  [
           LoadMapScreen(),
-          HomeScreen(),
-          ProfileScreen(),
+          const HomeScreen(),
+          const ProfileScreen(),
         ],
       ),
     );
   }
 
-  @override
-  bool get extendBodyBehindAppBar => true;
+  // @override
+  // bool get extendBodyBehindAppBar => true;
 
   @override
   Widget? buildBottomNavigationBar(BuildContext context) =>

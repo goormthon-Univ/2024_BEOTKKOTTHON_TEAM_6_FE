@@ -40,7 +40,7 @@ class DefaultBackAppBar extends StatelessWidget {
           ),
         ),
         icon: SvgPicture.asset(
-          "assets/icons/arrow_back.svg",
+          "assets/icons/arrow_back_blue.svg",
           width: 24,
           height: 24,
           colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
