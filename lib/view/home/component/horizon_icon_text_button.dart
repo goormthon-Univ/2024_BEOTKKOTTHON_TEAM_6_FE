@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:rebook/utility/system/font_system.dart';
 
-class IconTextButton extends StatelessWidget {
-  const IconTextButton({
+class HorizonIconTextButton extends StatelessWidget {
+  const HorizonIconTextButton({
     super.key,
     required this.text,
     required this.svgPath,

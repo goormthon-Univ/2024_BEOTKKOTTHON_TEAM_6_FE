@@ -17,7 +17,7 @@ enum ERecycle {
   @override
   toString() => ko;
 
-  ERecycle fromEn(String en) {
+  static ERecycle fromEn(String en) {
     switch (en) {
       case 'Paper':
         return ERecycle.paper;
