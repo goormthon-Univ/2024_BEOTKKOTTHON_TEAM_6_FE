@@ -10,6 +10,7 @@ import 'package:rebook/view_model/load_map/load_map_view_model.dart';
 import 'package:rebook/widget/button/custom_icon_button.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:rebook/widget/dialog/challenge_dialog.dart';
+import 'package:rebook/widget/dialog/quiz_dialog.dart';
 
 class LoadMapScreen extends BaseScreen<LoadMapViewModel> {
   final ScrollController _scrollController = ScrollController();
@@ -121,6 +122,8 @@ class LoadMapScreen extends BaseScreen<LoadMapViewModel> {
               ],
               OngoingAnimatedChallenge(
                 onTap: () {
+                  /// 홈화면 미구현이므로, 퀴즈 모달 테스트용
+                  // Get.dialog(QuizDialog(category: '비닐',));
                   Get.dialog(const ChallengeDialog());
                 },
               ),
