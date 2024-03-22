@@ -30,6 +30,7 @@ class RootViewModel extends GetxController {
   late final List<CustomBottomNavigationItemState> bottomNavItems;
 
   int get selectedIndex => _selectedIndex.value;
+  UserState get userState => _userState.value;
 
   List<SMIBool> get riveIconInputs => _riveIconInputs;
   List<StateMachineController?> get controllers => _controllers;

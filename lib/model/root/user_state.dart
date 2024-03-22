@@ -17,7 +17,7 @@ class UserState {
 
   UserState.initial()
       : encryptedId = '',
-        nickname = '',
+        nickname = '사용자',
         environmentalTemperature = '0.0',
         isActiveNotification = true,
         notificationHour = 0,

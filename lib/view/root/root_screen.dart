@@ -15,7 +15,7 @@ class RootScreen extends BaseScreen<RootViewModel> {
     return Obx(
       () => IndexedStack(
         index: viewModel.selectedIndex,
-        children:  [
+        children: [
           LoadMapScreen(),
           const HomeScreen(),
           const ProfileScreen(),
@@ -24,8 +24,8 @@ class RootScreen extends BaseScreen<RootViewModel> {
     );
   }
 
-  // @override
-  // bool get extendBodyBehindAppBar => true;
+  @override
+  bool get extendBodyBehindAppBar => true;
 
   @override
   Widget? buildBottomNavigationBar(BuildContext context) =>
