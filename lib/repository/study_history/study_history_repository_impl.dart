@@ -55,6 +55,13 @@ class StudyHistoryRepositoryImpl extends GetxService
 
   @override
   Future<bool> updateIsMarkingInStudyHistory(int id, bool isMarking) async {
-    return Future.value(true);
+    try {
+      await _studyHistoryRemoteProvider.patchIsMarkingInStudyHistory(
+          id, isMarking);
+    } catch (e) {
+      rethrow;
+    }
+
+    return true;
   }
 }

@@ -21,6 +21,14 @@ class StudyHistoryDetailState {
     );
   }
 
+  factory StudyHistoryDetailState.initial() {
+    return StudyHistoryDetailState(
+      imageUrl: '',
+      content: '',
+      createdAt: '',
+    );
+  }
+
   factory StudyHistoryDetailState.fromJson(Map<String, dynamic> json) {
     return StudyHistoryDetailState(
       imageUrl: json['imageUrl'],

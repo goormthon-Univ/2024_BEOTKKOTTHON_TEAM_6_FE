@@ -98,6 +98,11 @@ class StudyHistoryScreen extends BaseScreen<StudyHistoryViewModel> {
         Expanded(
           child: Obx(
             () {
+              if (viewModel.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
               if (viewModel.studyHistoryStates.isEmpty) {
                 return Center(
                   child: Text(
@@ -119,6 +124,7 @@ class StudyHistoryScreen extends BaseScreen<StudyHistoryViewModel> {
                     index: index,
                     state: viewModel.studyHistoryStates[index],
                     onTap: () {
+                      viewModel.fetchStudyHistoryDetail(index);
                       Get.bottomSheet(
                         Container(
                           width: Get.width - 32,
@@ -132,34 +138,40 @@ class StudyHistoryScreen extends BaseScreen<StudyHistoryViewModel> {
                               topRight: Radius.circular(24),
                             ),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: [
-                                  SvgPicture.asset(
-                                    "assets/icons/arrow_back_blue.svg",
-                                    width: 32,
-                                    height: 32,
-                                    colorFilter: const ColorFilter.mode(
-                                        Color(0xFF5356FF), BlendMode.srcIn),
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                    "2024-03-23",
-                                    style: FontSystem.KR24B.copyWith(
-                                      color: ColorSystem.grey,
+                          child: Obx(() {
+                            if (viewModel.isLoadingDetail) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    CustomIconButton(
+                                      assetPath:
+                                          'assets/icons/arrow_back_blue.svg',
+                                      onPressed: () {
+                                        Get.back();
+                                      },
                                     ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(height: 16),
-                              AspectRatio(
-                                aspectRatio: 1,
-                                child: Container(
+                                    const Spacer(),
+                                    Text(
+                                      viewModel
+                                          .studyHistoryDetailState.createdAt,
+                                      style: FontSystem.KR24B.copyWith(
+                                        color: ColorSystem.grey,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(height: 16),
+                                AspectRatio(
+                                  aspectRatio: 1,
                                   child: CachedNetworkImage(
-                                    imageUrl:
-                                        'https://www.foodicon.co.kr/news/photo/201911/5662_8470_155.jpg',
+                                    imageUrl: viewModel
+                                        .studyHistoryDetailState.imageUrl,
                                     imageBuilder: (context, imageProvider) =>
                                         Container(
                                       decoration: BoxDecoration(
@@ -176,23 +188,23 @@ class StudyHistoryScreen extends BaseScreen<StudyHistoryViewModel> {
                                         const Icon(Icons.error),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                child: Container(
-                                  width: Get.width - 64,
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: ColorSystem.grey.withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Text(
-                                    "dddddddddddddddddddddddddddddddddddd",
-                                    style: FontSystem.KR20M,
+                                Expanded(
+                                  child: Container(
+                                    width: Get.width - 64,
+                                    padding: const EdgeInsets.all(16),
+                                    decoration: BoxDecoration(
+                                      color: ColorSystem.grey.withOpacity(0.2),
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: Text(
+                                      viewModel.studyHistoryDetailState.content,
+                                      style: FontSystem.KR20M,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
+                              ],
+                            );
+                          }),
                         ),
                         isScrollControlled: true,
                       );
