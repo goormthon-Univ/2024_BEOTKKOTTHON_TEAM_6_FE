@@ -52,6 +52,9 @@ dependencies:
   # Skeleton Animation
   shimmer: ^3.0.0
 
+  # Cached Network Image
+  cached_network_image: ^3.3.1
+
 dev_dependencies:
   # Default
   flutter_test:

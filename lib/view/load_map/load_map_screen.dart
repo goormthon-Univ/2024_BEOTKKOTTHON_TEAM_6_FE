@@ -39,10 +39,8 @@ class LoadMapScreen extends BaseScreen<LoadMapViewModel> {
     final double screenHeight = Get.height; // 화면의 높이
 
     // 완료된 항목과 미완성 항목의 총 높이 계산
-    const double completedItemsHeight =
-        5 * itemHeight + 4 * connectLineHeight;
-    const double upcomingItemsHeight =
-        5 * itemHeight + 4 * connectLineHeight;
+    const double completedItemsHeight = 5 * itemHeight + 4 * connectLineHeight;
+    const double upcomingItemsHeight = 5 * itemHeight + 4 * connectLineHeight;
 
     const double beforeOngoingHeight = completedItemsHeight + connectLineHeight;
 
@@ -75,7 +73,7 @@ class LoadMapScreen extends BaseScreen<LoadMapViewModel> {
                   },
                 ),
                 CustomIconButton(
-                  assetPath: 'assets/icons/appbar_bookmark.svg',
+                  assetPath: 'assets/icons/bookmark_empty.svg',
                   onPressed: () {
                     // 검색 버튼이 탭됐을 때의 동작 구현
                   },
@@ -171,4 +169,3 @@ class NoticeDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) =>
       false;
 }
-

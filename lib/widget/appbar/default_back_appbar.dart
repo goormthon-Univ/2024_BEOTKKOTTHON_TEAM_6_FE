@@ -20,10 +20,8 @@ class DefaultBackAppBar extends StatelessWidget {
     return AppBar(
       title: Padding(
         padding: const EdgeInsets.only(right: 16),
-        child: Text(
-          title,
-          style: FontSystem.KR20B,
-        ),
+        child: Text(title,
+            style: FontSystem.KR24B.copyWith(color: const Color(0xFF5356FF))),
       ),
       centerTitle: false,
       surfaceTintColor: Colors.white,
@@ -43,7 +41,8 @@ class DefaultBackAppBar extends StatelessWidget {
           "assets/icons/arrow_back_blue.svg",
           width: 24,
           height: 24,
-          colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+          colorFilter:
+              const ColorFilter.mode(Color(0xFF5356FF), BlendMode.srcIn),
         ),
         onPressed: onBackPress,
       ),
