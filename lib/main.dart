@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:rebook/app/factory/secure_storage_factory.dart';
 import 'package:rebook/app/main_app.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:rebook/provider/base/base_web_socket.dart';
 
 void main() async {
   await onSystemInit();

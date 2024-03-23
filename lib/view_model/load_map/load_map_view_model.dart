@@ -1,22 +1,27 @@
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:rebook/app/factory/secure_storage_factory.dart';
 import 'package:rebook/model/loadmap/challenge_state.dart';
-import 'package:rebook/model/loadmap/challlenge_detail_state.dart';
+import 'package:rebook/model/loadmap/challenge_detail_state.dart';
+import 'package:rebook/provider/token/token_provider.dart';
 import 'package:rebook/repository/challenge/challenge_respository.dart';
+import 'package:rebook/utility/functions/log_util.dart';
+import 'package:rebook/view/load_map/widget/ongoing_animated_challenge.dart';
+import 'package:rebook/widget/dialog/challenge_dialog.dart';
 
 class LoadMapViewModel extends GetxController {
   /* ------------------------------------------------------ */
   /* -------------------- DI Fields ----------------------- */
   /* ------------------------------------------------------ */
   late final ChallengeRepository _challengeRepository;
-
-
   /* ------------------------------------------------------ */
   /* ----------------- Private Fields --------------------- */
   /* ------------------------------------------------------ */
+
+
   late final RxBool _isLoadingWhenOpenDialog;
   late final RxList<Rx<ChallengeState>> _challengeStates;
   late final Rx<ChallengeDetailState> _challengeDetailState;
-
 
   /* ------------------------------------------------------ */
   /* ----------------- Public Fields ---------------------- */
@@ -26,47 +31,54 @@ class LoadMapViewModel extends GetxController {
   ChallengeState getChallengeState(int index) => _challengeStates[index].value;
   ChallengeDetailState get challengeDetailState => _challengeDetailState.value;
 
+
   @override
   void onInit() {
     super.onInit();
     _challengeRepository = Get.find<ChallengeRepository>();
-    ///
-    _challengeStates = [ChallengeState(id: 1).obs].obs;
+    _challengeStates = [ChallengeState(id: 0).obs].obs;
     _challengeDetailState = ChallengeDetailState.initial().obs;
+    _isLoadingWhenOpenDialog = false.obs;
   }
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
+    final challenges = await _challengeRepository.readChallengeList();
 
-    _challengeStates.addAll(_challengeRepository.readChallengeList());
+    _challengeStates.clear();
 
+    _challengeStates.addAll(
+      challenges.map((challenge) => ChallengeState(
+        id: challenge.id,
+        roomId: challenge.roomId,
+        isCurrentParticipate: challenge.isCurrentParticipate,
+      ).obs),
+    );
   }
 
-  // @override
-  // void onReady() {
-  //   super.onReady();
-  //
-  //   _cardStates.addAll(_quizRepository
-  //       .readRandomQuizzes()
-  //       .map((e) => CardState(isCharacterCard: false, quizState: e).obs));
-  // }
 
-
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   // Dependency Injection
-  //   _quizRepository = Get.find<QuizRepository>();
-  //   _quizHistoryRepository = Get.find<QuizHistoryRepository>();
-  //
-  //   // Initialize private fields
-  //   _pageController = PageController(viewportFraction: 0.83);
-  //
-  //   _cardStates = [CardState(isCharacterCard: true).obs].obs;
-  //   _quizDetailState = QuizDetailState.initial().obs;
-  //   _isLoadingWhenOpenDialog = false.obs;
-  // }
-
-
+  Future<int> fetchChallengeDetail(int challengeId) async {
+    _isLoadingWhenOpenDialog.value = true;
+    try {
+      final detail = await _challengeRepository.readChallenge(challengeId);
+      _challengeDetailState.value = detail;
+      final socketPossible = _challengeDetailState.value.canParticipate;
+      Get.dialog(ChallengeDialog(
+        challengeDetail: detail,
+        challengeId: challengeId,
+      ));
+      if (socketPossible) {
+        return challengeId.toInt();
+      } else {
+        return -1;
+      }
+    } catch (e) {
+      /// 오류 처리
+      LogUtil.error(e);
+      rethrow;
+    } finally {
+      _isLoadingWhenOpenDialog.value = false;
+    }
+  }
 }

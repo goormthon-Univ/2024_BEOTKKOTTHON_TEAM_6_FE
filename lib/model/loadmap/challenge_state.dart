@@ -23,9 +23,9 @@ class ChallengeState {
 
   factory ChallengeState.fromJson(Map<String, dynamic> json) {
     return ChallengeState(
-      id: json['id'],
-      roomId: json['roomId'],
-      isCurrentParticipate: json['isCurrentParticipate'],
+      id: json['id'] as int,
+      roomId: json['roomId'] as int?,
+      isCurrentParticipate: json['isCurrentParticipate'] as bool?,
     );
   }
 }

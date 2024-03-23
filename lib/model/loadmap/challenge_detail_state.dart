@@ -7,6 +7,7 @@ class ChallengeDetailState {
     required this.canParticipate,
   });
 
+  /// 첫번째 챌린지: 디폴트 설명
   ChallengeDetailState.initial()
       : description = '기본 설명',
         canParticipate = false;

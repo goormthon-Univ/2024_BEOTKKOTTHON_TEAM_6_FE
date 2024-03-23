@@ -37,25 +37,21 @@ class _OngoingAnimatedChallengeState extends State<OngoingAnimatedChallenge>
 
   @override
   Widget build(BuildContext context) {
-    return Ink(
-      child: InkWell(
-        borderRadius: BorderRadius.circular(70),
-        highlightColor: ColorSystem.blue,
-        onTap: widget.onTap,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            SvgPicture.asset(
-              'assets/images/ongoing_challenge.svg',
-              width: 160,
-              height: 160,
-            ),
-            CustomPaint(
-              size: const Size(155, 155),
-              painter: AnimatingCircle(_controller),
-            ),
-          ],
-        ),
+    return GestureDetector(
+      onTap: widget.onTap,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          SvgPicture.asset(
+            'assets/images/ongoing_challenge.svg',
+            width: 160,
+            height: 160,
+          ),
+          CustomPaint(
+            size: const Size(155, 155),
+            painter: AnimatingCircle(_controller),
+          ),
+        ],
       ),
     );
   }
