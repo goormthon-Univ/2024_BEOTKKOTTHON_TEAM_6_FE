@@ -22,15 +22,15 @@ class WeeklyCalendar extends BaseWidget<ProfileViewModel> {
             () => TableCalendar(
               // Default Properties
               locale: Get.deviceLocale.toString(),
-              firstDay: viewModel.calendarState.focusedDate
+              firstDay: viewModel.calendarState.todayDate
                   .subtract(const Duration(days: 365)),
-              lastDay: viewModel.calendarState.focusedDate
+              lastDay: viewModel.calendarState.todayDate
                   .add(const Duration(days: 365)),
 
               // Date Properties
               currentDay: viewModel.calendarState.todayDate,
               focusedDay: viewModel.calendarState.focusedDate,
-              calendarFormat: CalendarFormat.twoWeeks,
+              calendarFormat: CalendarFormat.week,
               daysOfWeekVisible: true,
               daysOfWeekHeight: 20,
 
@@ -77,7 +77,6 @@ class WeeklyCalendar extends BaseWidget<ProfileViewModel> {
                 }
               },
               onPageChanged: (focusedDay) {
-                LogUtil.info('onPageChanged: $focusedDay');
                 viewModel.updateFocusedDate(focusedDay);
               },
 

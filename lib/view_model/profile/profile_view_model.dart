@@ -3,6 +3,7 @@ import 'package:rebook/model/home/quiz_history_state.dart';
 import 'package:rebook/model/profile/calender_state.dart';
 import 'package:rebook/model/profile/profile_card_state.dart';
 import 'package:rebook/repository/quiz_history/quiz_history_repository.dart';
+import 'package:rebook/view_model/root/root_view_model.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ProfileViewModel extends GetxController {
@@ -44,6 +45,25 @@ class ProfileViewModel extends GetxController {
   }
 
   void fetchQuizHistories() async {
+    _profileCardStates.removeRange(1, _profileCardStates.length);
+
+    final quizHistories = await _quizHistoryRepository
+        .readQuizHistoriesByDate(_calendarState.value.selectedDate);
+    for (var quizHistory in quizHistories) {
+      _profileCardStates.add(
+        ProfileCardState(
+          isEnvCard: false,
+          quizHistoryState: quizHistory,
+        ),
+      );
+    }
+  }
+
+  void fetchQuizHistoriesOuter() async {
+    if (_calendarState.value.todayDate != _calendarState.value.selectedDate) {
+      return;
+    }
+
     _profileCardStates.removeRange(1, _profileCardStates.length);
 
     final quizHistories = await _quizHistoryRepository
