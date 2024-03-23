@@ -10,14 +10,18 @@ class AnalysisRemoteProviderImpl extends BaseConnect
   String get defaultContentType => 'multipart/form-data';
 
   @override
-  Future<Map<String, dynamic>> poseImageForAnalysis(File image) async {
+  Future<Map<String, dynamic>> postImageForAnalysis(File image) async {
     Response response;
 
     try {
       response = await post(
         '/api/v1/analysis/image',
         FormData({
-          'image': MultipartFile(image, filename: '${DateTime.now()}.png'),
+          'image': MultipartFile(
+            image,
+            filename: '${DateTime.now()}.png',
+            contentType: 'image/png',
+          ),
         }),
       );
     } catch (e) {

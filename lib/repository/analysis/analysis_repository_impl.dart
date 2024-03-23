@@ -21,15 +21,11 @@ class AnalysisRepositoryImpl extends GetxService implements AnalysisRepository {
     Map<String, dynamic> data;
 
     try {
-      data = await _analysisProvider.poseImageForAnalysis(image);
+      data = await _analysisProvider.postImageForAnalysis(image);
     } catch (e) {
       return null;
     }
 
-    //   final bool completeTodayCurrentChallenge;
-    //   final ERecycle recycleCategory;
-    //   final String information;
-    //   final String createdAt;
     return AnalysisImageResultState(
       completeTodayCurrentChallenge: true,
       recycleCategory: ERecycle.paper,
