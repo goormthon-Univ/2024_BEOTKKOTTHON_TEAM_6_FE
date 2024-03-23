@@ -164,7 +164,9 @@ class QuizDialog extends StatelessWidget {
             const Spacer(),
           if (state.userAnswer != null && state.validAnswer != null)
             SvgPicture.asset(
-              'assets/images/quiz_result_not_correct.svg',
+              state.userAnswer == state.validAnswer
+                  ? 'assets/images/quiz_result_correct.svg'
+                  : 'assets/images/quiz_result_not_correct.svg',
               height: 32,
             )
         ],

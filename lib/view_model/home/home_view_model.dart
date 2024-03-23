@@ -48,11 +48,10 @@ class HomeViewModel extends GetxController {
   }
 
   @override
-  void onReady() {
+  void onReady() async {
     super.onReady();
 
-    _cardStates.addAll(_quizRepository
-        .readRandomQuizzes()
+    _cardStates.addAll((await _quizRepository.readRandomQuizzes())
         .map((e) => CardState(isCharacterCard: false, quizState: e).obs));
   }
 
@@ -62,12 +61,14 @@ class HomeViewModel extends GetxController {
 
     _isLoadingWhenOpenDialog.value = true;
 
-    await Future.delayed(const Duration(seconds: 1));
     if (quizState.quizHistoryId != null) {
-      _quizDetailState.value =
-          _quizHistoryRepository.readQuizHistory(quizState.quizHistoryId!);
+      _quizDetailState.value = await _quizHistoryRepository.readQuizHistory(
+        quizState.quizHistoryId!,
+      );
     } else {
-      _quizDetailState.value = _quizRepository.readQuiz(quizState.quizId);
+      _quizDetailState.value = await _quizRepository.readQuiz(
+        quizState.quizId,
+      );
     }
 
     _isLoadingWhenOpenDialog.value = false;
@@ -77,8 +78,8 @@ class HomeViewModel extends GetxController {
     CardState cardState = _cardStates[index].value;
     QuizState quizState = cardState.quizState!;
 
-    await Future.delayed(const Duration(milliseconds: 100));
-    Map<String, dynamic> result = _quizHistoryRepository.createQuizHistory(
+    Map<String, dynamic> result =
+        await _quizHistoryRepository.createQuizHistory(
       quizState.quizId,
       userAnswer,
     );
@@ -86,7 +87,7 @@ class HomeViewModel extends GetxController {
     _cardStates[index] = cardState
         .copyWith(
           quizState: quizState.copyWith(
-            quizHistoryId: result['quizHistoryId'] as int,
+            quizHistoryId: result['id'] as int,
             isChanged: true,
           ),
         )
@@ -94,7 +95,7 @@ class HomeViewModel extends GetxController {
 
     _quizDetailState.value = _quizDetailState.value.copyWith(
       userAnswer: userAnswer,
-      validAnswer: result['result'] as bool ? userAnswer : !userAnswer,
+      validAnswer: userAnswer == result['validAnswer'],
     );
   }
 
