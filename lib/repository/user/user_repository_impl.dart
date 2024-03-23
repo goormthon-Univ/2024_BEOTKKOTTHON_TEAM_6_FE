@@ -24,4 +24,14 @@ class UserRepositoryImpl extends GetxService implements UserRepository {
 
     return UserState.fromJson(data);
   }
+
+  @override
+  Future<void> updateUserNotificationActive(bool isActive) async {
+    await _userRemoteProvider.updateUserNotificationActive(isActive);
+  }
+
+  @override
+  Future<void> updateUserNotificationTime(int hour, int minute) async {
+    await _userRemoteProvider.updateUserNotificationTime(hour, minute);
+  }
 }

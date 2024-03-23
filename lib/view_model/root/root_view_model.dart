@@ -96,15 +96,20 @@ class RootViewModel extends GetxController {
     _riveIconInputs.add(controller.findInput<bool>('active') as SMIBool);
   }
 
-  void onIsAlarmSwitch() {
+  void onIsAlarmSwitch() async {
     _userState.value = _userState.value
         .copyWith(isActiveNotification: !_userState.value.isActiveNotification);
+
+    await _userRepository
+        .updateUserNotificationActive(_userState.value.isActiveNotification);
   }
 
-  void changeAlarmTime(int hour, int minute) {
+  void changeAlarmTime(int hour, int minute) async {
     _userState.value = _userState.value.copyWith(
       notificationHour: hour,
       notificationMinute: minute,
     );
+
+    await _userRepository.updateUserNotificationTime(hour, minute);
   }
 }
