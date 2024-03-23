@@ -61,7 +61,6 @@ class LoadMapScreen extends BaseScreen<LoadMapViewModel> {
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.white,
         elevation: 0,
-        scrolledUnderElevation: 0,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -102,7 +101,6 @@ class LoadMapScreen extends BaseScreen<LoadMapViewModel> {
   Widget buildBody(BuildContext context) {
     int completedItemsCount = 2; // 완료된 항목의 개수
     int upcomingItemsCount = 2; // 미완성 항목의 개수
-
     return ExtendedNestedScrollView(
       headerSliverBuilder: _sliverBuilder,
       body: ScrollConfiguration(

@@ -24,8 +24,10 @@ class ImageInputFragment extends BaseScreen<ChallengeAuthenticationViewModel> {
     return Container(
       decoration: BoxDecoration(
         color: ColorSystem.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
