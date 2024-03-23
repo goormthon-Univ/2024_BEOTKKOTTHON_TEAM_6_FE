@@ -12,6 +12,7 @@ class UserRepositoryImpl extends GetxService implements UserRepository {
     _userRemoteProvider = Get.find<UserRemoteProvider>();
   }
 
+  @override
   Future<UserState> readUserState() async {
     Map<String, dynamic> data;
 

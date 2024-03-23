@@ -27,10 +27,12 @@ class QuizState {
     );
   }
 
-  factory QuizState.fromMap(Map<String, dynamic> data) {
+  factory QuizState.fromJson(Map<String, dynamic> data) {
     return QuizState(
       quizId: data['id'] as int,
       category: ERecycle.fromEn(data['category'] as String),
+      quizHistoryId: data['quizHistoryId'] as int?,
+      isChanged: false,
     );
   }
 }
