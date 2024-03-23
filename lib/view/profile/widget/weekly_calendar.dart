@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:rebook/utility/functions/log_util.dart';
 import 'package:rebook/utility/system/color_system.dart';
 import 'package:rebook/utility/system/font_system.dart';
 import 'package:rebook/view/base/base_widget.dart';
@@ -27,9 +28,9 @@ class WeeklyCalendar extends BaseWidget<ProfileViewModel> {
                   .add(const Duration(days: 365)),
 
               // Date Properties
-              currentDay: DateTime.now(),
+              currentDay: viewModel.calendarState.todayDate,
               focusedDay: viewModel.calendarState.focusedDate,
-              calendarFormat: CalendarFormat.week,
+              calendarFormat: CalendarFormat.twoWeeks,
               daysOfWeekVisible: true,
               daysOfWeekHeight: 20,
 
@@ -76,6 +77,7 @@ class WeeklyCalendar extends BaseWidget<ProfileViewModel> {
                 }
               },
               onPageChanged: (focusedDay) {
+                LogUtil.info('onPageChanged: $focusedDay');
                 viewModel.updateFocusedDate(focusedDay);
               },
 

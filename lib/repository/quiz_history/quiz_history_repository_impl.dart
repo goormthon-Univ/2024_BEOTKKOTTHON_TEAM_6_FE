@@ -42,4 +42,17 @@ class QuizHistoryRepositoryImpl extends GetxService
 
     return QuizHistoryState.fromJson(data);
   }
+
+  @override
+  Future<List<QuizHistoryState>> readQuizHistoriesByDate(DateTime date) async {
+    List<dynamic> data;
+
+    try {
+      data = await _quizHistoryRemoteProvider.getQuizHistoriesByDate(date);
+    } catch (e) {
+      return [];
+    }
+
+    return data.map((e) => QuizHistoryState.fromJson(e)).toList();
+  }
 }

@@ -58,6 +58,9 @@ dependencies:
   # Table Calendar
   table_calendar: ^3.0.9
 
+  # Percent Indicator
+  percent_indicator: ^4.2.3
+
 dev_dependencies:
   # Default
   flutter_test:

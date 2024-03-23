@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:rebook/utility/functions/log_util.dart';
 import 'package:rebook/utility/static/app_routes.dart';
 import 'package:rebook/utility/system/color_system.dart';
 import 'package:rebook/utility/system/font_system.dart';
@@ -17,10 +16,6 @@ class UserBriefView extends BaseWidget<RootViewModel> {
       padding: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
         color: ColorSystem.white,
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(45),
-          bottomRight: Radius.circular(45),
-        ),
       ),
       child: Column(
         children: [

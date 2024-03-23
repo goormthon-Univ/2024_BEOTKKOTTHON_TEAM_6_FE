@@ -1,10 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rebook/utility/system/color_system.dart';
 import 'package:rebook/view/base/base_screen.dart';
+import 'package:rebook/view/profile/widget/env_thermostat_card.dart';
+import 'package:rebook/view/profile/widget/profile_quiz_history_card.dart';
 import 'package:rebook/view/profile/widget/user_brief_view.dart';
 import 'package:rebook/view/profile/widget/weekly_calendar.dart';
 import 'package:rebook/view_model/profile/profile_view_model.dart';
 import 'package:rebook/widget/appbar/default_white_svg_appbar.dart';
+import 'package:rebook/widget/dialog/quiz_dialog.dart';
 
 class ProfileScreen extends BaseScreen<ProfileViewModel> {
   const ProfileScreen({super.key});
@@ -40,120 +45,48 @@ class ProfileScreen extends BaseScreen<ProfileViewModel> {
           height: 12,
         ),
         const UserBriefView(),
+        Expanded(
+          child: Obx(
+            () => GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+              ),
+              itemCount: viewModel.profileCardStates.length,
+              itemBuilder: (context, index) {
+                if (viewModel.profileCardStates[index].isEnvCard) {
+                  return const EnvThermostatCard();
+                }
+
+                return ProfileQuizHistoryCard(
+                  index: index,
+                  state: viewModel.profileCardStates[index].quizHistoryState!,
+                  onTap: () {
+                    viewModel.fetchQuizHistoryDetail(index);
+                    Get.dialog(
+                      Obx(
+                        () => QuizDialog(
+                          isLoading: viewModel.isLoadingWhenOpenDialog,
+                          state: viewModel.quizHistoryState,
+                          onTapChoice: (value) {
+                            return;
+                          },
+                          onGiveUpOrExit: () {
+                            Get.back();
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ),
       ],
     );
   }
 
-//   Widget quiz(String item, answer, color) {
-//     return Center(
-//       child: Container(
-//         margin: EdgeInsets.only(bottom: 10),
-//         width: Get.width - 32,
-//         height: 69,
-//         decoration: BoxDecoration(
-//           color: Colors.white,
-//           borderRadius: BorderRadius.circular(45),
-//         ),
-//         child: InkWell(
-//           onTap: () {},
-//           child: Container(
-//             margin: EdgeInsets.symmetric(horizontal: 30),
-//             child: Row(
-//               children: [
-//                 Text(
-//                   item,
-//                   style: FontSystem.KR24R,
-//                 ),
-//                 Spacer(),
-//                 Text(
-//                   answer,
-//                   style: FontSystem.KR16B.copyWith(
-//                     color: Color(color),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-//
-//   Widget _profile(BuildContext context) {
-//     return Container(
-//       width: Get.width - 32,
-//       height: 90,
-//       decoration: BoxDecoration(
-//         color: Color(0xff8385FF),
-//         borderRadius: BorderRadius.circular(45),
-//       ),
-//       child: Row(
-//         children: [
-//           Row(
-//             children: [
-//               Container(
-//                 margin: EdgeInsets.only(left: 10),
-//                 width: 66,
-//                 height: 66,
-//                 decoration: BoxDecoration(
-//                   shape: BoxShape.circle,
-//                   color: Colors.black,
-//                   image: DecorationImage(
-//                     image: AssetImage('assets/icons/Avatar.png'),
-//                     fit: BoxFit.cover,
-//                   ),
-//                 ),
-//               ),
-//               SizedBox(width: 10),
-//               Padding(
-//                 padding: const EdgeInsets.only(top: 25.0),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   children: [
-//                     Text(
-//                       '유저닉네임',
-//                       style: FontSystem.KR14M.copyWith(
-//                         color: Colors.white,
-//                       ),
-//                     ),
-//                     SizedBox(height: 3),
-//                     Text(
-//                       '#회원코드',
-//                       style: FontSystem.KR12R.copyWith(
-//                         color: Color(0xffD4D4D4),
-//                       ),
-//                     )
-//                   ],
-//                 ),
-//               ),
-//             ],
-//           ),
-//           SizedBox(width: 170),
-//           IconButton(
-//             onPressed: () {
-//               Navigator.push(
-//                 context,
-//                 MaterialPageRoute(
-//                   builder: (context) => Setting(),
-//                 ),
-//               );
-//             },
-//             icon: SvgPicture.asset('assets/icons/settings.svg'),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-//
-//   Widget iconButton(String name, double num) {
-//     return IconButton(
-//       padding: EdgeInsets.only(right: num),
-//       visualDensity: VisualDensity(horizontal: -4.0, vertical: -4.0),
-//       onPressed: () {},
-//       icon: SvgPicture.asset('assets/icons/$name.svg'),
-//     );
-//   }
-//
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -210,57 +143,6 @@ class ProfileScreen extends BaseScreen<ProfileViewModel> {
 //                     children: [
 //                       Row(
 //                         children: [
-//                           Container(
-//                             width: (Get.width - 48) / 2,
-//                             height: (Get.width - 48) / 2,
-//                             margin: const EdgeInsets.all(16),
-//                             decoration: BoxDecoration(
-//                               color: Colors.white,
-//                               borderRadius: BorderRadius.circular(25),
-//                             ),
-//                             child: Padding(
-//                               padding: const EdgeInsets.all(16.0),
-//                               child: Column(
-//                                 crossAxisAlignment: CrossAxisAlignment.end,
-//                                 children: [
-//                                   Center(
-//                                     child: Text(
-//                                       "나의 환경온도",
-//                                       style: FontSystem.KR24B.copyWith(
-//                                         color: Color(0xFF5356FF),
-//                                       ),
-//                                     ),
-//                                   ),
-//                                   SizedBox(height: 50),
-//                                   Padding(
-//                                     padding: const EdgeInsets.only(right: 4.0),
-//                                     child: Row(
-//                                       mainAxisAlignment: MainAxisAlignment.end,
-//                                       children: [
-//                                         Text(
-//                                           "30°",
-//                                           style: FontSystem.KR24B.copyWith(
-//                                             color: Color(0xFF5356FF),
-//                                           ),
-//                                         ),
-//                                         SvgPicture.asset(
-//                                             'assets/icons/thermostat.svg'),
-//                                       ],
-//                                     ),
-//                                   ),
-//                                   SizedBox(height: 8),
-//                                   LinearPercentIndicator(
-//                                     padding: EdgeInsets.zero,
-//                                     lineHeight: 15.0,
-//                                     percent: 0.5,
-//                                     barRadius: Radius.circular(10),
-//                                     progressColor: Color(0xFF85D4EC),
-//                                     backgroundColor: Color(0xFFE6E6E6),
-//                                   ),
-//                                 ],
-//                               ),
-//                             ),
-//                           ),
 //                           InkWell(
 //                             onTap: () {},
 //                             child: Container(
