@@ -55,6 +55,9 @@ dependencies:
   # Permission
   permission_handler: ^11.2.1
 
+  # stomp
+  stomp_dart_client: ^1.0.3
+
 dev_dependencies:
   # Default
   flutter_test:
