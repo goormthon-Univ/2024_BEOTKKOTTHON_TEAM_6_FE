@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CustomIconButton extends StatelessWidget {
-  final String assetPath;
-  final Function() onPressed;
-
   const CustomIconButton({
     super.key,
     required this.assetPath,
     required this.onPressed,
+    this.colorFilter,
   });
+
+  final String assetPath;
+  final Function() onPressed;
+  final ColorFilter? colorFilter;
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +25,9 @@ class CustomIconButton extends StatelessWidget {
       ),
       icon: SvgPicture.asset(
         assetPath,
-        width: 24,
-        height: 24,
+        width: 32,
+        height: 32,
+        colorFilter: colorFilter,
       ),
       onPressed: onPressed,
     );

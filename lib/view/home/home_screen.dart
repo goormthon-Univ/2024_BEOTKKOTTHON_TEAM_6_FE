@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rebook/utility/functions/log_util.dart';
+import 'package:rebook/utility/static/app_routes.dart';
 import 'package:rebook/view/base/base_screen.dart';
 import 'package:rebook/view/home/widget/character_card.dart';
 import 'package:rebook/view/home/widget/home_user_view.dart';
@@ -85,7 +86,7 @@ class HomeScreen extends BaseScreen<HomeViewModel> {
               svgPath: 'assets/icons/study_book.svg',
               text: '공부기록 보러가기',
               onTap: () {
-                LogUtil.info('공부기록 보러가기');
+                Get.toNamed(Routes.STUDY_HISTORY);
               },
             ),
           ],
