@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:rebook/model/home/quiz_detail_state.dart';
 import 'package:rebook/model/home/quiz_state.dart';
 import 'package:rebook/model/loadmap/challenge_state.dart';
 import 'package:rebook/model/loadmap/challlenge_detail_state.dart';

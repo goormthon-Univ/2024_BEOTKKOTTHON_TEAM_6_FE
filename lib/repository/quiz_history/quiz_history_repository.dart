@@ -1,6 +1,6 @@
-import 'package:rebook/model/home/quiz_detail_state.dart';
+import 'package:rebook/model/home/quiz_history_state.dart';
 
 abstract class QuizHistoryRepository {
-  Map<String, dynamic> createQuizHistory(int quizId, bool answer);
-  QuizDetailState readQuizHistory(int quizHistoryId);
+  Future<Map<String, dynamic>> createQuizHistory(int quizId, bool answer);
+  Future<QuizHistoryState> readQuizHistory(int quizHistoryId);
 }
