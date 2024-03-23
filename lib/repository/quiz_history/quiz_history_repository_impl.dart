@@ -1,4 +1,4 @@
-import 'package:rebook/model/home/quiz_detail_state.dart';
+import 'package:rebook/model/home/quiz_history_state.dart';
 import 'package:rebook/model/type/e_recycle.dart';
 import 'package:rebook/repository/quiz_history/quiz_history_repository.dart';
 
@@ -12,11 +12,12 @@ class QuizHistoryRepositoryImpl implements QuizHistoryRepository {
   }
 
   @override
-  QuizDetailState readQuizHistory(int quizHistoryId) {
-    return QuizDetailState(
+  QuizHistoryState readQuizHistory(int quizHistoryId) {
+    return QuizHistoryState(
       category: ERecycle.paper,
-      content: 'This is a quiz history',
-      result: true,
+      content: '신문지는 재활용이 가능한가요?',
+      userAnswer: true,
+      validAnswer: false,
     );
   }
 }

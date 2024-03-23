@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:rebook/model/home/card_state.dart';
-import 'package:rebook/model/home/quiz_detail_state.dart';
+import 'package:rebook/model/home/quiz_history_state.dart';
 import 'package:rebook/model/home/quiz_state.dart';
 import 'package:rebook/repository/quiz/quiz_repository.dart';
 import 'package:rebook/repository/quiz_history/quiz_history_repository.dart';
@@ -20,7 +20,7 @@ class HomeViewModel extends GetxController {
 
   late final RxBool _isLoadingWhenOpenDialog;
   late final RxList<Rx<CardState>> _cardStates;
-  late final Rx<QuizDetailState> _quizDetailState;
+  late final Rx<QuizHistoryState> _quizDetailState;
 
   /* ------------------------------------------------------ */
   /* ----------------- Public Fields ---------------------- */
@@ -30,7 +30,7 @@ class HomeViewModel extends GetxController {
   bool get isLoadingWhenOpenDialog => _isLoadingWhenOpenDialog.value;
   RxList<Rx<CardState>> get cardStates => _cardStates;
   CardState getCardState(int index) => _cardStates[index].value;
-  QuizDetailState get quizDetailState => _quizDetailState.value;
+  QuizHistoryState get quizDetailState => _quizDetailState.value;
 
   @override
   void onInit() {
@@ -43,7 +43,7 @@ class HomeViewModel extends GetxController {
     _pageController = PageController(viewportFraction: 0.83);
 
     _cardStates = [CardState(isCharacterCard: true).obs].obs;
-    _quizDetailState = QuizDetailState.initial().obs;
+    _quizDetailState = QuizHistoryState.initial().obs;
     _isLoadingWhenOpenDialog = false.obs;
   }
 
@@ -62,7 +62,7 @@ class HomeViewModel extends GetxController {
 
     _isLoadingWhenOpenDialog.value = true;
 
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
     if (quizState.quizHistoryId != null) {
       _quizDetailState.value =
           _quizHistoryRepository.readQuizHistory(quizState.quizHistoryId!);
@@ -73,14 +73,14 @@ class HomeViewModel extends GetxController {
     _isLoadingWhenOpenDialog.value = false;
   }
 
-  void changeQuizStateInDialog(int index, bool choice) async {
+  void changeQuizStateInDialog(int index, bool userAnswer) async {
     CardState cardState = _cardStates[index].value;
     QuizState quizState = cardState.quizState!;
 
     await Future.delayed(const Duration(milliseconds: 100));
     Map<String, dynamic> result = _quizHistoryRepository.createQuizHistory(
       quizState.quizId,
-      choice,
+      userAnswer,
     );
 
     _cardStates[index] = cardState
@@ -93,7 +93,8 @@ class HomeViewModel extends GetxController {
         .obs;
 
     _quizDetailState.value = _quizDetailState.value.copyWith(
-      result: result['result'] as bool,
+      userAnswer: userAnswer,
+      validAnswer: result['result'] as bool ? userAnswer : !userAnswer,
     );
   }
 

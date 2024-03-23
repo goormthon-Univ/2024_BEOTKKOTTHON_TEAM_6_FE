@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:rebook/model/home/quiz_detail_state.dart';
+import 'package:rebook/model/home/quiz_history_state.dart';
 import 'package:rebook/utility/system/color_system.dart';
 import 'package:rebook/utility/system/font_system.dart';
 import 'package:rebook/widget/button/rounded_rectangle_text_button.dart';
@@ -17,7 +17,7 @@ class QuizDialog extends StatelessWidget {
   });
 
   final bool isLoading;
-  final QuizDetailState state;
+  final QuizHistoryState state;
   final Function(bool) onTapChoice;
   final Function()? onGiveUpOrExit;
 
@@ -115,45 +115,61 @@ class QuizDialog extends StatelessWidget {
         borderRadius: 12,
       );
     }
-    if (state.result == null) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        height: Get.height * 0.5 - (60 + 100 + 60 + 40 + 40),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            GestureDetector(
-              onTap: () {
-                onTapChoice(true);
-              },
-              child: SvgPicture.asset(
-                'assets/images/quiz_choice_right.svg',
-                height: Get.height * 0.1,
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      height: Get.height * 0.5 - (60 + 100 + 60 + 40 + 40),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  onTapChoice(true);
+                },
+                child: SvgPicture.asset(
+                  'assets/images/quiz_choice_right.svg',
+                  height: Get.height * 0.1,
+                  colorFilter:
+                      state.userAnswer != null && state.userAnswer == true
+                          ? null
+                          : ColorFilter.mode(
+                              ColorSystem.black.withOpacity(0.2),
+                              BlendMode.srcIn,
+                            ),
+                ),
               ),
-            ),
-            GestureDetector(
-              onTap: () {
-                onTapChoice(false);
-              },
-              child: SvgPicture.asset(
-                'assets/images/quiz_choice_not_right.svg',
-                height: Get.height * 0.1,
+              GestureDetector(
+                onTap: () {
+                  onTapChoice(false);
+                },
+                child: SvgPicture.asset(
+                  'assets/images/quiz_choice_not_right.svg',
+                  height: Get.height * 0.1,
+                  colorFilter:
+                      state.userAnswer != null && state.userAnswer == false
+                          ? null
+                          : ColorFilter.mode(
+                              ColorSystem.black.withOpacity(0.2),
+                              BlendMode.srcIn,
+                            ),
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    } else {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        height: Get.height * 0.5 - (60 + 100 + 60 + 40 + 40),
-        child: SvgPicture.asset(
-          'assets/images/quiz_result${state.result! ? '' : '_not'}_correct.svg',
-          height: Get.height * 0.1,
-        ),
-      );
-    }
+            ],
+          ),
+          if (state.userAnswer != null && state.validAnswer != null)
+            const Spacer(),
+          if (state.userAnswer != null && state.validAnswer != null)
+            SvgPicture.asset(
+              'assets/images/quiz_result_not_correct.svg',
+              height: 32,
+            )
+        ],
+      ),
+    );
   }
 
   Widget _giveUpOrExitButton() {
@@ -165,7 +181,7 @@ class QuizDialog extends StatelessWidget {
       );
     }
 
-    if (state.result == null) {
+    if (state.userAnswer == null) {
       return RoundedRectangleTextButton(
         text: '포기 하기',
         textStyle: FontSystem.KR20B.copyWith(
