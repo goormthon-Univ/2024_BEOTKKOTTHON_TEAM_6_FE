@@ -30,6 +30,9 @@ class TokenProviderImpl implements TokenProvider {
   Future<void> clearTokens() async {
     await _flutterSecureStorage.delete(key: ULPExtension.accessToken);
     await _flutterSecureStorage.delete(key: ULPExtension.refreshToken);
+
+    _accessToken = null;
+    _refreshToken = null;
   }
 
   /* ------------------------------------------------------------ */

@@ -11,4 +11,5 @@ abstract class Routes {
   static const String MATCHING = "/matching";
   static const String CHALLENGE_AUTHENTICATION = "/challenge_authentication";
   static const String STUDY_HISTORY = "/study_history";
+  static const String SETTING = "/setting";
 }
