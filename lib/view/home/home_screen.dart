@@ -46,7 +46,7 @@ class HomeScreen extends BaseScreen<HomeViewModel> {
 
   Widget _cardView() => Container(
         padding: const EdgeInsets.symmetric(vertical: 20),
-        height: Get.height * 0.5 + 40,
+        height: Get.height * 0.5 + 20,
         child: Obx(
           () => PageView.builder(
             controller: controller.pageController,
@@ -77,9 +77,9 @@ class HomeScreen extends BaseScreen<HomeViewModel> {
           children: [
             VerticalIconTextButton(
               svgPath: 'assets/icons/image_wallpaper.svg',
-              text: '사진으로 알아보기',
+              text: '사진으로 공부하기',
               onTap: () {
-                LogUtil.info('사진으로 알아보기');
+                Get.toNamed(Routes.STUDY_BY_IMAGE);
               },
             ),
             VerticalIconTextButton(

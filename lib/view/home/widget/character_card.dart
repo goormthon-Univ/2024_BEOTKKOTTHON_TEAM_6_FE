@@ -20,7 +20,7 @@ class CharacterCard extends BaseWidget<RootViewModel> {
           const Spacer(),
           SvgPicture.asset(
             'assets/thumbnail/card_character_green.svg',
-            width: Get.width * 0.7 - 40,
+            width: Get.width * 0.7 - 60,
           ),
         ],
       ),

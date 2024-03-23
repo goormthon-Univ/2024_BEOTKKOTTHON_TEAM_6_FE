@@ -86,6 +86,15 @@ class RootViewModel extends GetxController {
     _selectedIndex.value = index;
   }
 
+  void updateEnvironmentalTemperature() {
+    // 0.1 증가시키기
+    _userState.value = _userState.value.copyWith(
+      environmentalTemperature:
+          (double.parse(_userState.value.environmentalTemperature) + 0.1)
+              .toString(),
+    );
+  }
+
   void riveOnInIt(Artboard artBoard, {required String stateMachineName}) {
     StateMachineController? controller =
         StateMachineController.fromArtboard(artBoard, stateMachineName);

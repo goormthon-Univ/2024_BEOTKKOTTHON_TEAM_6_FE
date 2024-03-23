@@ -17,7 +17,6 @@ import 'package:rebook/widget/line/infinity_horizon_line.dart';
 class SettingScreen extends BaseScreen<SettingViewModel> {
   const SettingScreen({super.key});
   @override
-  // TODO: implement screenBackgroundColor
   Color? get screenBackgroundColor => ColorSystem.white;
 
   @override
