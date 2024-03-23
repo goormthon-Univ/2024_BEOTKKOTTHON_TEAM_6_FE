@@ -86,6 +86,15 @@ class RootViewModel extends GetxController {
     _selectedIndex.value = index;
   }
 
+  void updateEnvironmentalTemperature() {
+    // 0.1 증가시키기
+    _userState.value = _userState.value.copyWith(
+      environmentalTemperature:
+          (double.parse(_userState.value.environmentalTemperature) + 0.1)
+              .toString(),
+    );
+  }
+
   void riveOnInIt(Artboard artBoard, {required String stateMachineName}) {
     StateMachineController? controller =
         StateMachineController.fromArtboard(artBoard, stateMachineName);
@@ -94,5 +103,22 @@ class RootViewModel extends GetxController {
     _controllers.add(controller);
 
     _riveIconInputs.add(controller.findInput<bool>('active') as SMIBool);
+  }
+
+  void onIsAlarmSwitch() async {
+    _userState.value = _userState.value
+        .copyWith(isActiveNotification: !_userState.value.isActiveNotification);
+
+    await _userRepository
+        .updateUserNotificationActive(_userState.value.isActiveNotification);
+  }
+
+  void changeAlarmTime(int hour, int minute) async {
+    _userState.value = _userState.value.copyWith(
+      notificationHour: hour,
+      notificationMinute: minute,
+    );
+
+    await _userRepository.updateUserNotificationTime(hour, minute);
   }
 }

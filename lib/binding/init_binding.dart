@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:rebook/provider/analysis/analysis_remote_provider.dart';
+import 'package:rebook/provider/analysis/analysis_remote_provider_impl.dart';
 import 'package:rebook/provider/auth/auth_provider.dart';
 import 'package:rebook/provider/auth/auth_provider_impl.dart';
 import 'package:rebook/provider/quiz/quiz_remote_provider.dart';
@@ -9,6 +11,8 @@ import 'package:rebook/provider/study_history/study_history_remote_provider.dart
 import 'package:rebook/provider/study_history/study_history_remote_provider_impl.dart';
 import 'package:rebook/provider/user/user_remote_provider.dart';
 import 'package:rebook/provider/user/user_remote_provider_impl.dart';
+import 'package:rebook/repository/analysis/analysis_repository.dart';
+import 'package:rebook/repository/analysis/analysis_repository_impl.dart';
 import 'package:rebook/repository/auth/auth_repository.dart';
 import 'package:rebook/repository/auth/auth_repository_impl.dart';
 import 'package:rebook/repository/quiz/quiz_repository.dart';
@@ -30,11 +34,10 @@ class InitBinding extends Bindings {
     Get.lazyPut<UserRemoteProvider>(() => UserRemoteProviderImpl());
     Get.lazyPut<QuizRemoteProvider>(() => QuizRemoteProviderImpl());
     Get.lazyPut<QuizHistoryRemoteProvider>(
-      () => QuizHistoryRemoteProviderImpl(),
-    );
+        () => QuizHistoryRemoteProviderImpl());
     Get.lazyPut<StudyHistoryRemoteProvider>(
-      () => StudyHistoryRemoteProviderImpl(),
-    );
+        () => StudyHistoryRemoteProviderImpl());
+    Get.lazyPut<AnalysisRemoteProvider>(() => AnalysisRemoteProviderImpl());
 
     // Repositories
     Get.putAsync<AuthRepository>(
@@ -45,5 +48,6 @@ class InitBinding extends Bindings {
     Get.lazyPut<QuizRepository>(() => QuizRepositoryImpl());
     Get.lazyPut<QuizHistoryRepository>(() => QuizHistoryRepositoryImpl());
     Get.lazyPut<StudyHistoryRepository>(() => StudyHistoryRepositoryImpl());
+    Get.lazyPut<AnalysisRepository>(() => AnalysisRepositoryImpl());
   }
 }

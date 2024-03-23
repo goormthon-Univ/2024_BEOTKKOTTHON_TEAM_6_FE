@@ -17,4 +17,33 @@ class UserRemoteProviderImpl extends BaseConnect implements UserRemoteProvider {
 
     return response.body['data'];
   }
+
+  @override
+  Future<void> updateUserNotificationActive(bool isActive) async {
+    try {
+      await patch(
+        '/api/v1/users/notification',
+        {
+          'isActiveNotification': isActive,
+        },
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> updateUserNotificationTime(int hour, int minute) async {
+    try {
+      await patch(
+        '/api/v1/users/notification-time',
+        {
+          'notificationHour': hour,
+          'notificationMinute': minute,
+        },
+      );
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

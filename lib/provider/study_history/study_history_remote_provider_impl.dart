@@ -50,6 +50,17 @@ class StudyHistoryRemoteProviderImpl extends BaseConnect
 
   @override
   Future<bool> patchIsMarkingInStudyHistory(int id, bool isMarking) async {
-    return Future.value(true);
+    try {
+      await patch(
+        '/api/v1/study-histories/$id',
+        {
+          'isMarking': isMarking,
+        },
+      );
+    } catch (e) {
+      rethrow;
+    }
+
+    return true;
   }
 }

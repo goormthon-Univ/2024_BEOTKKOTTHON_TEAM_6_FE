@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:rebook/provider/base/base_connect.dart';
 import 'package:rebook/provider/quiz_history/quiz_history_remote_provider.dart';
 
@@ -29,6 +30,24 @@ class QuizHistoryRemoteProviderImpl extends BaseConnect
         {
           'quizId': quizId,
           'answer': answer,
+        },
+      );
+    } catch (e) {
+      rethrow;
+    }
+
+    return response.body['data'];
+  }
+
+  @override
+  Future<List<dynamic>> getQuizHistoriesByDate(DateTime date) async {
+    Response response;
+
+    try {
+      response = await get(
+        '/api/v1/users/quiz-histories',
+        query: {
+          'whichDate': DateFormat('yyyy-MM-dd').format(date),
         },
       );
     } catch (e) {

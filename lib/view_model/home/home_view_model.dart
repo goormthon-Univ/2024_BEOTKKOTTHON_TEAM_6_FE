@@ -5,6 +5,7 @@ import 'package:rebook/model/home/quiz_history_state.dart';
 import 'package:rebook/model/home/quiz_state.dart';
 import 'package:rebook/repository/quiz/quiz_repository.dart';
 import 'package:rebook/repository/quiz_history/quiz_history_repository.dart';
+import 'package:rebook/view_model/profile/profile_view_model.dart';
 
 class HomeViewModel extends GetxController {
   /* ------------------------------------------------------ */
@@ -97,6 +98,8 @@ class HomeViewModel extends GetxController {
       userAnswer: userAnswer,
       validAnswer: userAnswer == result['validAnswer'],
     );
+
+    Get.find<ProfileViewModel>().fetchQuizHistoriesOuter();
   }
 
   void changeQuizStateInScreen(int index) {

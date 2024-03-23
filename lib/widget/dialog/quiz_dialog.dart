@@ -197,7 +197,7 @@ class QuizDialog extends StatelessWidget {
       );
     } else {
       return RoundedRectangleTextButton(
-        text: '다른 문제 풀러가기',
+        text: '확인 완료',
         textStyle: FontSystem.KR20B.copyWith(
           color: ColorSystem.white,
         ),
