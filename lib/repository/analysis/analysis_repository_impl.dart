@@ -26,11 +26,6 @@ class AnalysisRepositoryImpl extends GetxService implements AnalysisRepository {
       return null;
     }
 
-    return AnalysisImageResultState(
-      completeTodayCurrentChallenge: true,
-      recycleCategory: ERecycle.paper,
-      information: "asdfasdf",
-      createdAt: "2021-09-01",
-    );
+    return AnalysisImageResultState.fromJson(data);
   }
 }

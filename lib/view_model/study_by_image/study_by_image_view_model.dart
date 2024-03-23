@@ -79,12 +79,14 @@ class StudyByImageViewModel extends GetxController {
           await _analysisRepository.analysisImage(file);
       _analysisResultState.value = result;
     } catch (e) {
+      print(e);
       _analysisResultState.value = null;
     } finally {
       if (_analysisResultState.value != null &&
           _analysisResultState.value!.completeTodayCurrentChallenge) {
         Get.find<RootViewModel>().updateEnvironmentalTemperature();
       }
+
       _moveToPage(2);
     }
   }

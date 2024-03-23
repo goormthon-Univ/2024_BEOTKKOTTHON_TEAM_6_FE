@@ -18,7 +18,7 @@ class AnalysisImageResultState {
       completeTodayCurrentChallenge: json['completeTodayCurrentChallenge'],
       recycleCategory: ERecycle.fromEn(json['recycleCategory']),
       information: json['information'],
-      createdAt: json['createdAt'],
+      createdAt: json['created_at'],
     );
   }
 }
