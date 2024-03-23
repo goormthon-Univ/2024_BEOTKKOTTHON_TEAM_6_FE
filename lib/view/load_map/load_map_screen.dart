@@ -3,6 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:rebook/model/loadmap/challenge_state.dart';
 import 'package:rebook/provider/base/base_web_socket.dart';
+import 'package:rebook/repository/challenge/challenge_respository.dart';
+import 'package:rebook/utility/static/app_routes.dart';
 import 'package:rebook/utility/system/color_system.dart';
 import 'package:rebook/utility/system/font_system.dart';
 import 'package:rebook/view/base/base_screen.dart';
@@ -15,7 +17,7 @@ import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 class LoadMapScreen extends BaseScreen<LoadMapViewModel> {
   var challengeId;
   final ScrollController _scrollController = ScrollController();
-
+  late final ChallengeRepository _challengeRepository = Get.find<ChallengeRepository>();
   LoadMapScreen({super.key}) {
     // '진행중'인 챌린지 위치로 초기 스크롤 설정
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -78,11 +80,16 @@ class LoadMapScreen extends BaseScreen<LoadMapViewModel> {
     } else {
       return OngoingAnimatedChallenge(
         onTap: () async {
-          challengeId = viewModel.fetchChallengeDetail(state.id);
-          if (challengeId != -1) {
-            final controller = WebSocketController();
-            controller.connectToWebSocket();
-          }
+          _challengeRepository.readChallengeRoomUsers(state.roomId!);
+          Future.delayed(Duration(seconds: 1), () {
+            Get.toNamed(Routes.MATCHING);
+          });
+          // _challengeRepository.readChallengeRoomUsers
+          // challengeId = viewModel.fetchChallengeDetail(state.id);
+          // if (challengeId != -1) {
+          //   final controller = WebSocketController();
+          //   controller.connectToWebSocket();
+          // }
         },
       );
     }

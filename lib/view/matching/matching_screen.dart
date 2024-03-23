@@ -97,7 +97,7 @@ class MatchingScreen extends BaseScreen<MatchingViewModel> {
     }
 
     return Obx(() => GridView.builder(
-          itemCount: controller.challengeStates.length,
+          itemCount: controller.challengeStates.length - 2,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 1.0 / 1.85,
@@ -132,9 +132,9 @@ class MatchingScreen extends BaseScreen<MatchingViewModel> {
                         style:
                             FontSystem.KR18B.copyWith(color: ColorSystem.blue),
                       ),
-                      Expanded(
-                        child: categoryImages(challengeRoomUser.studyHistories),
-                      ),
+                      // Expanded(
+                      //   child: categoryImages(challengeRoomUser.studyHistories),
+                      // ),
                     ],
                   ),
                 ],

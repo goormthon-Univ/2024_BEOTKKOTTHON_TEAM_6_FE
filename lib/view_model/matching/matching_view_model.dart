@@ -30,7 +30,6 @@ class MatchingViewModel extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    _challengeRepository = Get.find<ChallengeRepository>();
     _challengeRoomUserStates = RxList<Rx<ChallengeRoomUserState>>.from([
       ChallengeRoomUserState(
           userId: "1",

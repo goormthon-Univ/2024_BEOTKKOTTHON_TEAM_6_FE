@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:rebook/model/loadmap/challenge_detail_state.dart';
+import 'package:rebook/model/loadmap/challenge_state.dart';
 import 'package:rebook/provider/base/base_web_socket.dart';
 import 'package:rebook/utility/static/app_routes.dart';
 import 'package:rebook/utility/system/color_system.dart';
@@ -90,11 +91,11 @@ class ChallengeController extends GetxController {
   var isMatchingComplete = false.obs;
   var buttonText = '시작하기'.obs;
   final WebSocketController webSocketController = Get.find();
+  // final ChallengeState challengeState = Get.find<ChallengeState>(id);
   final ChallengeDetailState state = Get.find<ChallengeDetailState>();
   @override
   void onInit() {
-    super.onInit(); // super.onInit()을 호출하여 초기화 과정을 보장합니다.
-    // state.canParticipate 값에 따라 buttonText 값을 설정합니다.
+    super.onInit();
     if (!state.canParticipate) {
       buttonText.value = '이미 참여 중...';
     }
